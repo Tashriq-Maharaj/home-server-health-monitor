@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:20px; background-color:#f4f4f9; font-family:Arial, Helvetica, sans-serif;">
+  <div style="background:#ffffff; padding:20px; border-radius:8px; max-width:600px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+
+    <h2 style="color:#333; border-bottom:2px solid #007bff; padding-bottom:8px; margin-top:0;">🖥️ Home Server Health Report</h2>
+
+    {% for section in sections %}
+      {% if section['status'] == 'ok' %}
+        {% set dot = '🟢' %}
+      {% elif section['status'] == 'warn' %}
+        {% set dot = '🟠' %}
+      {% else %}
+        {% set dot = '🔴' %}
+      {% endif %}
+
+      <h3 style="color:#555; margin-top:20px; margin-bottom:8px;">{{ dot }} {{ section['name'] }}</h3>
+      <ul style="list-style-type:none; padding-left:0; margin:0;">
+        {% for label, value in section['items'] %}
+        <li style="padding:6px 0; border-bottom:1px solid #eee; color:#444;">
+          <b>{{ label }}:</b> {{ value }}
+        </li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+
+  </div>
+</body>
+</html>
